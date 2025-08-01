@@ -1,0 +1,50 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main"
+        xmlns:vm="clr-namespace:Main.ViewModel"
+        xmlns:View="clr-namespace:Main.View" x:Class="Main.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="606" MinWidth="300" MaxWidth="300">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- 空白彈性區域 -->
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Authenticator" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <View:SvgIconButton Grid.Column="1" Width="50" Height="50" IconSize="25" SvgPath="Assets/add.svg" Command="{Binding AddOtpCommand}"/>
+        </Grid>
+        <Separator Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="5">
+            <ItemsControl ItemsSource="{Binding OtpItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <View:OtpView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <!-- 加上間距 -->
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                        <!-- 下方間距 10 -->
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,0 +1,75 @@
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.exe
+*.dll
+*.pdb
+*.tmp
+*.log
+*.obj
+*.lib
+*.ncb
+*.sbr
+*.res
+*.pch
+*.ipch
+
+# Project files
+*.csproj.user
+*.vcxproj.user
+*.wdproj.user
+*.wixproj.user
+*.sqlproj.user
+
+# NuGet packages
+packages/
+*.nupkg
+.nuget/NuGetScratch/
+.nuget/packages/
+
+# Resharper files
+*.resharper
+*.resharper.user
+
+# Other temporary files
+*.~
+*.bak
+*.old
+*.obj
+*.ilk
+*.aps
+*.bsc
+*.idb
+*.opt
+*.out
+*.map
+*.ncb
+*.scc
+*.vssscc
+*.vspscc
+*.pgp
+*.psess
+*.vsp
+*.vspx
+*.cache
+*.sdf
+*.dbmdl
+*.mdf
+*.ldf
+*.tlog
+*.lastbuildstate
+*.VC.opendb
+*.VC.db
+
+# User-specific files
+Thumbs.db
+Desktop.ini
