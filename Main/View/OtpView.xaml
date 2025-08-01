@@ -5,13 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Main.View"
              xmlns:vm="clr-namespace:Main.ViewModel"
+             xmlns:common="clr-namespace:Main.Common"
              mc:Ignorable="d" Width="250" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <common:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    </UserControl.Resources>
 
     <Grid Margin="10, 10, 10, 10">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Issuer}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="{Binding OtpCode}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0" FontSize="36" HorizontalAlignment="Left"/>
-            <TextBlock Text="{Binding TimeLeft}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+                <TextBox Grid.Column="0" Text="{Binding Name}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <local:SvgIconButton Grid.Column="1" SvgPath="Assets/edit.svg" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}" Command="{Binding EditCommand}" ToolTip="Edit"/>
+                <local:SvgIconButton Grid.Column="1" SvgPath="Assets/check.svg" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding EditCompletedCommand}" ToolTip="Complete Edit"/>
+                <local:SvgIconButton Grid.Column="2" SvgPath="Assets/delete.svg" Command="{Binding DeleteCommand}"/>
+            </Grid>
+            <TextBlock Grid.Row="1" Text="{Binding OtpCode}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0" FontSize="36" HorizontalAlignment="Left" FontFamily="Consolas"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Issuer}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Consolas" FontSize="18"/>
+                <TextBlock Grid.Column="2" Text="{Binding TimeLeft}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Consolas" FontSize="18"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

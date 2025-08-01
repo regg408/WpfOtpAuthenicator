@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Main.ViewModel"
         xmlns:View="clr-namespace:Main.View" x:Class="Main.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="606" MinWidth="300" MaxWidth="300">
+        Title="OTP Authenicator" Height="606" MinWidth="300" MaxWidth="300" Icon="/Assets/lock.ico">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -22,11 +22,10 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <!-- 空白彈性區域 -->
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="Authenticator" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <View:SvgIconButton Grid.Column="1" Width="50" Height="50" IconSize="25" SvgPath="Assets/add.svg" Command="{Binding AddOtpCommand}"/>
+            <View:SvgIconButton Grid.Column="1" Width="50" Height="50" IconSize="25" SvgPath="Assets/add.svg" ToolTip="Add" Command="{Binding AddOtpCommand}"/>
         </Grid>
         <Separator Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="5">
