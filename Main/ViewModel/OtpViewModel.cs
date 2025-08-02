@@ -1,6 +1,6 @@
 ﻿using Main.Common;
 using OtpNet;
-using System.Net.Sockets;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Main.ViewModel
@@ -42,11 +42,19 @@ namespace Main.ViewModel
             set { _isEdit = value; RaisePropertyChanged(nameof(IsEdit)); }
         }
 
+        private string _copiedText;
+        public string CopiedText
+        {
+            get => _copiedText;
+            set { _copiedText = value; RaisePropertyChanged(nameof(CopiedText)); }
+        }
+
         public string Secret { get; set; }
 
         public DelegateCommand EditCommand { get; set; }
         public DelegateCommand EditCompletedCommand { get; set; }
         public DelegateCommand DeleteCommand { get; set; }
+        public DelegateCommand CopyCommand { get; set; }
 
         public Action? EditCompletedAction { get; set; }
         public Action<OtpViewModel>? DeleteAction { get; set; }
@@ -71,6 +79,11 @@ namespace Main.ViewModel
             DeleteCommand = new DelegateCommand
             {
                 ExecuteAction = this.Delete
+            };
+
+            CopyCommand = new DelegateCommand
+            {
+                ExecuteAction = this.Copy
             };
 
             var secret = Base32Encoding.ToBytes(base32Secret);
@@ -102,6 +115,14 @@ namespace Main.ViewModel
         void Delete(object? parameter)
         {
             DeleteAction?.Invoke(this);
+        }
+
+        async void Copy(object? parameter)
+        {
+            Clipboard.SetText(OtpCode);
+            CopiedText = "✔ 已複製";
+            await Task.Delay(1500); // 顯示 1.5 秒
+            CopiedText = string.Empty;
         }
     }
 }
