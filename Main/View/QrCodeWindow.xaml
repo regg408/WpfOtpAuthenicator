@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Main.View"
         mc:Ignorable="d"
-        Title="QR Code" Height="400" Width="400" Loaded="Window_Loaded">
+        Title="QR Code" Height="400" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
         <Image x:Name="QrCodeImage" Height="350" Width="350"/>
     </Grid>

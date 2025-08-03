@@ -39,8 +39,8 @@ namespace Main.View
                 Format = BarcodeFormat.QR_CODE,
                 Options = new QrCodeEncodingOptions
                 {
-                    Height = 200,
-                    Width = 200,
+                    Height = 350,
+                    Width = 350,
                 }
             };
 
