@@ -6,14 +6,13 @@
              xmlns:local="clr-namespace:Main.View"
              mc:Ignorable="d" >
     <Button Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-          ToolTip="{Binding ToolTip, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            ToolTip="{Binding ToolTip, RelativeSource={RelativeSource AncestorType=UserControl}}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="IconImage"
-             Width="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
-             Height="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
-             />
+                   Width="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Height="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                 VerticalAlignment="Center"/>
+                       VerticalAlignment="Center"/>
         </StackPanel>
     </Button>
 </UserControl>

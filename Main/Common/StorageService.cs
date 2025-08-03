@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace Main.Common
 {
+    /// <summary>
+    /// 負責讀取、讀取OTP
+    /// </summary>
     internal class StorageService
     {
         private static readonly string FolderPath = Path.Combine(
@@ -11,6 +14,10 @@ namespace Main.Common
 
         private static readonly string FilePath = Path.Combine(FolderPath, "otps.json");
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<OtpAccount> Load()
         {
             if (!File.Exists(FilePath))

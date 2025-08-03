@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Main.View"
              xmlns:vm="clr-namespace:Main.ViewModel"
-             xmlns:common="clr-namespace:Main.Common"
+             xmlns:common="clr-namespace:Main.Common" d:DataContext="{d:DesignInstance Type=vm:OtpViewModel}"
              mc:Ignorable="d" Width="250" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -45,7 +45,7 @@
                 <TextBox Grid.Column="0" Text="{Binding Name}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <local:SvgIconButton Grid.Column="1" SvgPath="Assets/edit.svg" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}" Command="{Binding EditCommand}" ToolTip="Edit"/>
                 <local:SvgIconButton Grid.Column="1" SvgPath="Assets/check.svg" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding EditCompletedCommand}" ToolTip="Complete Edit"/>
-                <local:SvgIconButton Grid.Column="2" SvgPath="Assets/delete.svg" Command="{Binding DeleteCommand}"/>
+                <local:SvgIconButton Grid.Column="2" SvgPath="Assets/delete.svg" Command="{Binding DeleteCommand}" ToolTip="Delete"/>
             </Grid>
 
 
@@ -55,12 +55,12 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="{Binding OtpCode}" Style="{StaticResource TransparentButtonStyle}" FontSize="36" FontFamily="Consolas" HorizontalAlignment="Left" Command="{Binding CopyCommand}" />
-                <TextBlock Grid.Column="1" Text="{Binding CopiedText}" FontSize="14" Foreground="Green" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,5,0,0" FontFamily="Colonna MT" VerticalAlignment="Center">
+                <TextBlock Grid.Column="1" Text="{Binding CopiedText}" FontSize="14" Foreground="Green" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,5,0,0" FontFamily="Consolas" VerticalAlignment="Center">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Opacity" Value="0"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CopiedText}" Value="✔ 已複製">
+                                <DataTrigger Binding="{Binding CopiedText}" Value="✔ Copied">
                                     <DataTrigger.EnterActions>
                                         <BeginStoryboard>
                                             <Storyboard>

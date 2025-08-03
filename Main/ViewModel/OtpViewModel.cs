@@ -120,7 +120,7 @@ namespace Main.ViewModel
         async void Copy(object? parameter)
         {
             Clipboard.SetText(OtpCode);
-            CopiedText = "✔ 已複製";
+            CopiedText = "✔ Copied";
             await Task.Delay(1500); // 顯示 1.5 秒
             CopiedText = string.Empty;
         }

@@ -1,12 +1,6 @@
 ﻿using Main.Common;
 using Main.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Main.ViewModel
 {
@@ -21,10 +15,13 @@ namespace Main.ViewModel
             {
                 ExecuteAction = this.AddOtp
             };
-
             this.Load();
         }
 
+        /// <summary>
+        /// 新增OTP
+        /// </summary>
+        /// <param name="parameter"></param>
         void AddOtp(object? parameter)
         {
             var win = new AddOtpWindow();
@@ -39,6 +36,9 @@ namespace Main.ViewModel
             }
         }
 
+        /// <summary>
+        /// 儲存
+        /// </summary>
         void Save()
         {
             List<OtpAccount> ptps = [];

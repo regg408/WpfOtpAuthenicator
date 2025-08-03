@@ -33,10 +33,16 @@ namespace Main.ViewModel
 
         public AddOtpWindowViewModel()
         {
-            UploadImageCommand = new DelegateCommand();
-            UploadImageCommand.ExecuteAction = new Action<object?>(this.UploadImage);
+            UploadImageCommand = new DelegateCommand
+            {
+                ExecuteAction = new Action<object?>(this.UploadImage)
+            };
         }
 
+        /// <summary>
+        /// 上傳QR Code圖片
+        /// </summary>
+        /// <param name="parameter"></param>
         void UploadImage(object? parameter)
         {
             var dlg = new OpenFileDialog
@@ -61,7 +67,12 @@ namespace Main.ViewModel
             }
         }
 
-        private string ParseOtpUriSecret(string uri)
+        /// <summary>
+        /// 解析OTP uri密鑰
+        /// </summary>
+        /// <param name="uri">OTP uri</param>
+        /// <returns>OTP密鑰</returns>
+        private static string ParseOtpUriSecret(string uri)
         {
             try
             {
@@ -75,7 +86,12 @@ namespace Main.ViewModel
             }
         }
 
-        private string ParseOtpUriIssuer(string uri)
+        /// <summary>
+        /// 解析OTP uri發行來源
+        /// </summary>
+        /// <param name="uri">OTP uri</param>
+        /// <returns>OTP發行來源</returns>
+        private static string ParseOtpUriIssuer(string uri)
         {
             try
             {

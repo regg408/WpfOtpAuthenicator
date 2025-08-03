@@ -83,14 +83,13 @@ namespace Main.View
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(SvgIconButton), new PropertyMetadata(null));
 
-        public string ToolTip
+        public new string ToolTip
         {
             get => (string)GetValue(ToolTipProperty);
             set => SetValue(ToolTipProperty, value);
         }
 
-        public static readonly DependencyProperty ToolTipProperty =
+        public static new readonly DependencyProperty ToolTipProperty =
             DependencyProperty.Register(nameof(ToolTip), typeof(string), typeof(SvgIconButton), new PropertyMetadata(""));
-
     }
 }
