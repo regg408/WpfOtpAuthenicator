@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 
-
 namespace Main.Common
 {
     /// <summary>

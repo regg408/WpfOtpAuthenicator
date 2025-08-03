@@ -1,6 +1,5 @@
 ﻿using Main.Common;
 using Microsoft.Win32;
-using OtpNet;
 using System.Drawing;
 using System.Web;
 using ZXing.Windows.Compatibility;
