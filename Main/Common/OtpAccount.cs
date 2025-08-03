@@ -6,16 +6,20 @@
     internal class OtpAccount
     {
         /// <summary>
+        /// URI
+        /// </summary>
+        public string Uri { get; set; } = "";
+        /// <summary>
         /// 名稱
         /// </summary>
-        public string Name { get; set; }
+        public string Label { get; set; } = "";
         /// <summary>
         /// 發行來源
         /// </summary>
-        public string Issuer { get; set; }
+        public string Issuer { get; set; } = "";
         /// <summary>
         /// 密鑰
         /// </summary>
-        public string Secret { get; set; }
+        public string Secret { get; set; } = "";
     }
 }

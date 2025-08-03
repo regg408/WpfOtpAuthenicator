@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Main.View"
              xmlns:vm="clr-namespace:Main.ViewModel"
              xmlns:common="clr-namespace:Main.Common" d:DataContext="{d:DesignInstance Type=vm:OtpViewModel}"
-             mc:Ignorable="d" Width="250" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+             mc:Ignorable="d" Width="350" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <common:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
@@ -40,12 +40,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
-                <TextBox Grid.Column="0" Text="{Binding Name}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBlock Grid.Column="0" Text="{Binding Label}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+                <TextBox Grid.Column="0" Text="{Binding Label}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <local:SvgIconButton Grid.Column="1" SvgPath="Assets/edit.svg" Visibility="{Binding IsEdit, Converter={StaticResource InverseBooleanToVisibilityConverter}}" Command="{Binding EditCommand}" ToolTip="Edit"/>
                 <local:SvgIconButton Grid.Column="1" SvgPath="Assets/check.svg" Visibility="{Binding IsEdit, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding EditCompletedCommand}" ToolTip="Complete Edit"/>
-                <local:SvgIconButton Grid.Column="2" SvgPath="Assets/delete.svg" Command="{Binding DeleteCommand}" ToolTip="Delete"/>
+                <local:SvgIconButton Grid.Column="2" SvgPath="Assets/qr_code.svg" Command="{Binding ShowQrCodeCommand}" ToolTip="Show QrCode"/>
+                <local:SvgIconButton Grid.Column="3" SvgPath="Assets/delete.svg" Command="{Binding DeleteCommand}" ToolTip="Delete"/>
             </Grid>
 
 

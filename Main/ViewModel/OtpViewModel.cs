@@ -1,4 +1,5 @@
 ﻿using Main.Common;
+using Main.View;
 using OtpNet;
 using System.Windows;
 using System.Windows.Threading;
@@ -7,11 +8,13 @@ namespace Main.ViewModel
 {
     internal class OtpViewModel : BaseViewModel
     {
-        private string _name = "";
-        public string Name
+        public string QrCodeUri { get; set; } = "";
+
+        private string _label = "";
+        public string Label
         {
-            get => _name;
-            set { _name = value; RaisePropertyChanged(nameof(Name)); }
+            get => _label;
+            set { _label = value; RaisePropertyChanged(nameof(Label)); }
         }
 
         private string _issuer = "";
@@ -42,7 +45,7 @@ namespace Main.ViewModel
             set { _isEdit = value; RaisePropertyChanged(nameof(IsEdit)); }
         }
 
-        private string _copiedText;
+        private string _copiedText = "";
         public string CopiedText
         {
             get => _copiedText;
@@ -53,6 +56,7 @@ namespace Main.ViewModel
 
         public DelegateCommand EditCommand { get; set; }
         public DelegateCommand EditCompletedCommand { get; set; }
+        public DelegateCommand ShowQrCodeCommand { get; set; }
         public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand CopyCommand { get; set; }
 
@@ -61,9 +65,10 @@ namespace Main.ViewModel
 
         private readonly Totp _totp;
         private readonly DispatcherTimer _timer;
-        public OtpViewModel(string name, string issuer, string base32Secret)
+        public OtpViewModel(string uri, string name, string issuer, string base32Secret)
         {
-            Name = name;
+            QrCodeUri = uri;
+            Label = name;
             Issuer = issuer;
             Secret = base32Secret;
             EditCommand = new DelegateCommand
@@ -74,6 +79,11 @@ namespace Main.ViewModel
             EditCompletedCommand = new DelegateCommand
             {
                 ExecuteAction = this.CompletedEdit
+            };
+
+            ShowQrCodeCommand = new DelegateCommand
+            {
+                ExecuteAction = this.ShowQrCode
             };
 
             DeleteCommand = new DelegateCommand
@@ -110,6 +120,12 @@ namespace Main.ViewModel
         {
             IsEdit = false;
             EditCompletedAction?.Invoke();
+        }
+
+        void ShowQrCode(object? parameter)
+        {
+            var win = new QrCodeWindow(QrCodeUri);
+            win.ShowDialog();
         }
 
         void Delete(object? parameter)

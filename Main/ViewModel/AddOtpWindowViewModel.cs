@@ -1,5 +1,6 @@
 ﻿using Main.Common;
 using Microsoft.Win32;
+using OtpNet;
 using System.Drawing;
 using System.Web;
 using ZXing.Windows.Compatibility;
@@ -15,6 +16,15 @@ namespace Main.ViewModel
         {
             get => _canConfirm;
             set { _canConfirm = value; RaisePropertyChanged(nameof(CanConfirm)); }
+        }
+
+        public string OtpUri { get; set; } = "";
+
+        private string _label = "";
+        public string Label
+        {
+            get => _label;
+            set { _label = value; RaisePropertyChanged(nameof(Label)); }
         }
 
         private string _issuer = "";
@@ -56,53 +66,33 @@ namespace Main.ViewModel
                 var result = new BarcodeReader().Decode(bitmap);
                 if (result != null)
                 {
-                    var parsed = ParseOtpUriSecret(result.Text);
-                    if (!string.IsNullOrWhiteSpace(parsed))
+                    var uri = new Uri(result.Text);
+                    var otpProperty = ParseOtpUri(new Uri(result.Text));
+                    if (!string.IsNullOrWhiteSpace(otpProperty.Secret))
                     {
-                        Issuer = ParseOtpUriIssuer(result.Text);
-                        Secret = parsed;
+                        OtpUri = uri.ToString();
+                        Label = otpProperty.Label;
+                        Issuer = otpProperty.Issuer;
+                        Secret = otpProperty.Secret;
                         CanConfirm = true;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// 解析OTP uri密鑰
-        /// </summary>
-        /// <param name="uri">OTP uri</param>
-        /// <returns>OTP密鑰</returns>
-        private static string ParseOtpUriSecret(string uri)
+        static OtpProperty ParseOtpUri(Uri uri)
         {
-            try
-            {
-                var parsed = new Uri(uri);
-                var query = HttpUtility.ParseQueryString(parsed.Query);
-                return query["secret"] ?? "";
-            }
-            catch
-            {
-                return "";
-            }
-        }
+            var type = uri.Host;
+            var label = Uri.UnescapeDataString(uri.AbsolutePath.TrimStart('/'));
+            var parameters = HttpUtility.ParseQueryString(uri.Query);
 
-        /// <summary>
-        /// 解析OTP uri發行來源
-        /// </summary>
-        /// <param name="uri">OTP uri</param>
-        /// <returns>OTP發行來源</returns>
-        private static string ParseOtpUriIssuer(string uri)
-        {
-            try
+            return new OtpProperty
             {
-                var parsed = new Uri(uri);
-                var query = HttpUtility.ParseQueryString(parsed.Query);
-                return query["issuer"] ?? "";
-            }
-            catch
-            {
-                return "";
-            }
+                Type = type,
+                Label = label,
+                Secret = parameters["secret"] ?? "",
+                Issuer = parameters["issuer"] ?? ""
+            };
         }
     }
 }

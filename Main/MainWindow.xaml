@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Main.ViewModel"
         xmlns:View="clr-namespace:Main.View" x:Class="Main.MainWindow"
         mc:Ignorable="d"
-        Title="OTP Authenicator" Height="606" MinWidth="300" MaxWidth="300" Icon="/Assets/lock.ico">
+        Title="OTP Authenicator" Height="606" MinWidth="400" MaxWidth="300" Icon="/Assets/lock.ico">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
